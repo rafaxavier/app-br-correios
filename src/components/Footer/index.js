@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
-import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import IconMaterialC from 'react-native-vector-icons/MaterialCommunityIcons';
 export default function Footer({ navigation }) {
 

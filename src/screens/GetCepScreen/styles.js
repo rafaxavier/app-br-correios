@@ -3,56 +3,73 @@ import { View, StyleSheet, Image, Text, TextInput, TouchableOpacity, SafeAreaVie
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection:'column',  (default no react-native)
-    backgroundColor: '#F9F905',
-    // alinha verticalmente
-    justifyContent: 'center',
-    // alinha horizontalmente
-    alignItems: 'center',
-      // padding: 15,
-    // width: '100%',
+  },
+  background: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 
   search:{
-    marginBottom:50,
+    position: 'absolute',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingTop: 20,
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 90,
   },
 
   title:{
-    fontSize:35, 
-    color: '#153CA7',
+    fontSize:25, 
+    color: '#fff',
     alignSelf:'center',
-    top:0,
-    fontWeight:'bold',
+    top:45,
+    fontWeight:'600',
   },
 
   input: {
+    flexDirection:'row',
+    justifyContent:'space-between',
+    top:100,
     width: 300,
     height: 50,
     backgroundColor: '#fff',
-    borderWidth: 3,
     borderColor: '#153CA7',
-    borderRadius: 12,
+    borderRadius: 25,
     paddingHorizontal: 15,
-    fontSize:20
+    marginBottom:60
+  },
+  inputText:{
+    fontSize:18, 
+    width:'80%',
+    fontWeight:'600',
+    color: '#153CA7',
   },
   icon: {
-    position: 'absolute',
-    bottom:5,
     color: '#153CA7',
-    fontSize:35, 
-    right:15
+    fontSize:45,
+    margin:2, 
+  },
+
+  containerLoading:{
+    flex:1,
+    alignItems:'center', 
+    justifyContent:'center'
   },
 
   iconLoading: {
-    height:150
+    height:150,
   },
 
   card: {
-    borderWidth:1,
-    padding:15,
-    backgroundColor:'#303B58',
-    width:'90%',
-    borderRadius:12
+    top:200,
+    marginBottom:200,
+    alignSelf:'center'
   },
   cardError: {
     borderWidth:1,
