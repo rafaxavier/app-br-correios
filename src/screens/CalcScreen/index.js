@@ -5,16 +5,15 @@ import { styles } from './styles';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import IconMaterialC from 'react-native-vector-icons/MaterialCommunityIcons';
 import Footer from '../../components/Footer';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function CalcScreen({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   return (
-    <SafeAreaView style={styles.container} >
-      <View>
-        <Text>Calcular frete</Text>
+    <SafeAreaView  style={styles.container}>
+      <LinearGradient colors={['#153CA7', '#F9F905']} style={styles.background} />
+      <View >
+        <Text style={styles.title} >Calcular frete</Text>
       </View>
       <Footer navigation={navigation}/>
     </SafeAreaView>

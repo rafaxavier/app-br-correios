@@ -7,6 +7,7 @@ import IconMaterialC from 'react-native-vector-icons/MaterialCommunityIcons';
 import Footer from '../../components/Footer';
 import api from './../../services/api';
 import LottieView from 'lottie-react-native'
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function GetCepScreen({ navigation }) {
   const [cep, setCep] = useState('');
@@ -24,6 +25,7 @@ export default function GetCepScreen({ navigation }) {
   async function handleGetCep() {
     setLoading('on');
     try {
+      setData('');
       const response = await api.get(`/busca-cep?cep=${cep}`);
       setData(response.data);
       setLoading('off');
@@ -39,26 +41,29 @@ export default function GetCepScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container} >
-      {loading === 'on' && data === '' ?
-        <LottieView style={styles.iconLoading}
-          source={require('./../../assets/95728-loading-19.json')}
-          autoPlay={true}
-        />
+      <LinearGradient colors={['#153CA7', '#F9F905']} style={styles.background} />
+      {loading === 'on' ?
+        <View style={styles.containerLoading}>
+          <LottieView style={styles.iconLoading}
+            source={require('./../../assets/95728-loading-19.json')}
+            autoPlay={true}
+          />
+        </View>
         : (
           <View style={styles.search}>
             <Text style={styles.title}>Buscar por cep</Text>
-            <TextInput style={styles.input}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoCorrect={false}
-              placeholder="Digite o cep"
-              placeholderTextColor="#153CA7"
-              value={formatCEP(cep)}
-              onChangeText={setCep}
-            />
-            <TouchableOpacity onPress={handleGetCep}>
-              <IconFontAwesome5 style={styles.icon} name="search-location" />
-            </TouchableOpacity>
+            <View style={styles.input}>
+              <TextInput style={styles.inputText}
+                placeholder="Digite o Cep"
+                placeholderTextColor="#153CA7"
+                value={formatCEP(cep)}
+                onChangeText={setCep}
+              />
+              <TouchableOpacity onPress={handleGetCep}>
+                <IconFontAwesome5 style={styles.icon} name="search-location" />
+              </TouchableOpacity>
+            </View>
+
           </View>
         )
       }
