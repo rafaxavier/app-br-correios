@@ -77,6 +77,7 @@ export const styles = StyleSheet.create({
   cardError: {
     alignItems: 'center',
     borderWidth: 1,
+    marginTop: 25,
     padding: 15,
     backgroundColor: '#900',
     borderRadius: 12,
@@ -85,6 +86,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontStyle: 'italic',
     fontWeight: '600',
-    color: '#153CA7',
+    color: '#fff',
   },
 });
