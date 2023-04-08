@@ -9,10 +9,10 @@ export const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: '#153FA7',
     flexDirection: 'row',
-    height: 90,
+    height: 70,
     borderTopStartRadius: 15,
     borderTopEndRadius: 15,
-    padding: 15,
+    padding: 5,
     marginHorizontal: 15,
   },
   icon: {
