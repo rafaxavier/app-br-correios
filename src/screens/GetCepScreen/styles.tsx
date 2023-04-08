@@ -86,6 +86,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontStyle: 'italic',
     fontWeight: '600',
-    color: '#fff',
+    color: '#153CA7',
   },
 });
