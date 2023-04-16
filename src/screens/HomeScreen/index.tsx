@@ -34,6 +34,7 @@ interface Objeto {
 
 interface Evento {
   descricao: string;
+  evento: string;
   codigo: string;
   tipo: string;
   dtHrCriado: string;
