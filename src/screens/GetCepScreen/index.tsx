@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/jsx-no-bind */
 import React, { useState } from 'react';
 import {
   View,
@@ -15,10 +13,27 @@ import Footer from '../../components/Footer';
 import api from '../../services/api';
 import { styles } from './styles';
 
+interface Erro {
+  mensagem: string;
+}
+
+interface ApiResponse {
+  cep: string;
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+  ibge: string;
+  gia: string;
+  ddd: string;
+  siafi: string;
+}
+
 export default function GetCepScreen({ navigation }: any) {
-  const [cep, setCep] = useState('');
-  const [error, setError] = useState<any>('');
-  const [data, setData] = useState<any>(null);
+  const [cep, setCep] = useState<string>('');
+  const [erro, setErro] = useState<Erro | undefined>();
+  const [data, setData] = useState<ApiResponse>();
   const [loading, setLoading] = useState<'on' | 'off'>('off');
 
   function formatCEP(paramCep: string) {
@@ -35,7 +50,7 @@ export default function GetCepScreen({ navigation }: any) {
       if (cep.length <= 8) {
         throw new Error('Cep inválido, cep exemplo: 30668-635');
       } else {
-        setData(null);
+        setData(undefined);
         const response = await api.get(`/busca-cep?cep=${cep}`);
         setData(response.data);
         setLoading('off');
@@ -43,9 +58,12 @@ export default function GetCepScreen({ navigation }: any) {
     } catch (e) {
       setCep('');
       setLoading('off');
-      setError(e);
+      if (e) {
+        setErro({ mensagem: 'Erro inesperado, tenta novamente mais tarde' });
+      }
+      setData(undefined);
       setTimeout(() => {
-        setError('');
+        setErro(undefined);
       }, 3000);
     }
   }
@@ -76,7 +94,7 @@ export default function GetCepScreen({ navigation }: any) {
               value={formatCEP(cep)}
               onChangeText={setCep}
             />
-            <TouchableOpacity onPress={handleGetCep}>
+            <TouchableOpacity onPress={() => handleGetCep()}>
               <IconFontAwesome5 style={styles.icon} name="search-location" />
             </TouchableOpacity>
           </View>
@@ -101,9 +119,9 @@ export default function GetCepScreen({ navigation }: any) {
       }
       {
         // caso tenha erro
-        error ? (
+        erro ? (
           <View style={styles.cardError}>
-            <Text style={{ color: '#fff', fontSize: 16 }}>{error.message}</Text>
+            <Text style={{ color: '#fff', fontSize: 16 }}>{erro.mensagem}</Text>
           </View>
         ) : null
       }

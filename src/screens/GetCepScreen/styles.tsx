@@ -75,8 +75,10 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
   },
   cardError: {
+    position: 'absolute',
     alignItems: 'center',
     borderWidth: 1,
+    margin: 20,
     marginTop: 25,
     padding: 15,
     backgroundColor: '#900',
