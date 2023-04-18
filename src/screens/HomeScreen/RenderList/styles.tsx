@@ -28,14 +28,6 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 12,
   },
-  card2: {
-    height: 70,
-    padding: 9,
-    margin: 4,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    paddingBottom: 10,
-  },
 
   line1: {
     maxWidth: 315,

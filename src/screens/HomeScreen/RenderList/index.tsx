@@ -119,12 +119,14 @@ export default function RenderList({
             </View>
           </TouchableOpacity>
         ) : (
-          <View style={styles.card2} key={value.id || `${index}`}>
+          <View style={styles.card} key={value.id || `${index}`}>
             <View style={styles.line1}>
               {icon && <IconFontAwesome5 style={iconStyle} name={icon} />}
-              <Text style={{ fontSize: 14.5, marginLeft: 2 }}>{descricao}</Text>
+              <Text style={styles.descricao}>{descricao}</Text>
             </View>
-            <Text>{dtHrCriado}</Text>
+            <View style={styles.line2}>
+              <Text style={styles.data}>{convertDate(dtHrCriado)}</Text>
+            </View>
           </View>
         );
       })}
