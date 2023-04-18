@@ -15,14 +15,10 @@ export const styles = StyleSheet.create({
     bottom: 0,
   },
 
-  // modal: {
-  //   // alignItems: 'center',
-  //   paddingBottom: -60,
-  // },
-
   codigoHeader: {
     top: 40,
     alignSelf: 'center',
     color: '#fff',
+    marginBottom: 10,
   },
 });

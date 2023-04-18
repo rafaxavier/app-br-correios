@@ -38,32 +38,30 @@ export default function ModalDetalhesObjeto({
         colors={['#153CA7', '#F9F905']}
         style={styles.background}
       />
-      <View>
-        <Header
-          title="Status do Objeto"
-          leftIcon={{
-            iconComponent: (
-              <IconMaterialCI
-                style={{ fontSize: 45, color: '#F9F905' }}
-                name="arrow-left-circle"
-              />
-            ),
-            onPress: closeModal,
-          }}
-          rightIcon={{
-            iconComponent: (
-              <IconMaterialCI
-                style={{ fontSize: 45, color: 'red' }}
-                name="delete-circle"
-              />
-            ),
-            onPress: () => handleDeletarObjetoById(objeto.id),
-          }}
-        />
-        <Text style={styles.codigoHeader}>{objeto.id}</Text>
+      <Header
+        title="Status do Objeto"
+        leftIcon={{
+          iconComponent: (
+            <IconMaterialCI
+              style={{ fontSize: 45, color: '#F9F905' }}
+              name="arrow-left-circle"
+            />
+          ),
+          onPress: closeModal,
+        }}
+        rightIcon={{
+          iconComponent: (
+            <IconMaterialCI
+              style={{ fontSize: 45, color: 'red' }}
+              name="delete-circle"
+            />
+          ),
+          onPress: () => handleDeletarObjetoById(objeto.id),
+        }}
+      />
+      <Text style={styles.codigoHeader}>{objeto.id}</Text>
 
-        <RenderList dados={objeto.eventos} />
-      </View>
+      <RenderList dados={objeto.eventos} />
     </View>
   );
 }
