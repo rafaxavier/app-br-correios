@@ -23,7 +23,7 @@ type RootStackParamList = {
 
 type NavigationProps = StackNavigationProp<RootStackParamList>;
 
-interface FooterProps {
+interface HomeScreenProps {
   navigation: NavigationProps;
 }
 
@@ -40,7 +40,9 @@ interface Evento {
   dtHrCriado: string;
 }
 
-export default function HomeScreen({ navigation }: FooterProps): JSX.Element {
+export default function HomeScreen({
+  navigation,
+}: HomeScreenProps): JSX.Element {
   const [data, setData] = useState<Objeto[]>([]);
   const [modalAddObjeto, setModalAddObjeto] = useState<boolean>(false);
   const [modalDetalhesObjeto, setModalDetalhesObjeto] =
