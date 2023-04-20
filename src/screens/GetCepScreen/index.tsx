@@ -9,6 +9,7 @@ import {
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import LottieView from 'lottie-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { StackNavigationProp } from '@react-navigation/stack';
 import Footer from '../../components/Footer';
 import api from '../../services/api';
 import { styles } from './styles';
@@ -31,7 +32,19 @@ interface ApiResponse {
   siafi: string;
 }
 
-export default function GetCepScreen({ navigation }: any) {
+type RootStackParamList = {
+  HomeScreen: undefined;
+  CalcScreen: undefined;
+  GetCepScreen: undefined;
+};
+
+type NavigationProps = StackNavigationProp<RootStackParamList>;
+
+interface GetCepScreenProps {
+  navigation: NavigationProps;
+}
+
+export default function GetCepScreen({ navigation }: GetCepScreenProps) {
   const [cep, setCep] = useState<string>('');
   const [erro, setErro] = useState<Erro | undefined>();
   const [data, setData] = useState<ApiResponse>();
