@@ -12,6 +12,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Footer from '../../components/Footer';
 import api from '../../services/api';
 import { styles } from './styles';
+import { animation } from '../../assets/output';
 
 interface Erro {
   mensagem: string;
@@ -76,12 +77,7 @@ export default function GetCepScreen({ navigation }: any) {
       />
       {loading === 'on' ? (
         <View style={styles.containerLoading}>
-          <LottieView
-            style={styles.iconLoading}
-            // eslint-disable-next-line global-require, import/extensions
-            source={require('../../assets/95728-loading-19.json')}
-            autoPlay
-          />
+          <LottieView style={styles.iconLoading} source={animation} autoPlay />
         </View>
       ) : (
         <View style={styles.search}>
