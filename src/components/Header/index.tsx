@@ -4,11 +4,11 @@ import { styles } from './styles';
 
 interface HeaderProps {
   title: string;
-  leftIcon: {
+  leftIcon?: {
     iconComponent: ReactNode;
     onPress: () => void;
   };
-  rightIcon: {
+  rightIcon?: {
     iconComponent: ReactNode;
     onPress: () => void;
   };
@@ -31,3 +31,8 @@ export default function Header({ title, leftIcon, rightIcon }: HeaderProps) {
     </View>
   );
 }
+
+Header.defaultProps = {
+  leftIcon: undefined,
+  rightIcon: undefined,
+};
