@@ -1,17 +1,9 @@
-export const convertDate = (value: string) => {
-  const dataString = value;
-  const data = new Date(dataString);
-
-  const hora = `0${data.getHours()}`.slice(-2); // adiciona o zero à esquerda se a hora tiver apenas um dígito
-  const minutos = `0${data.getMinutes()}`.slice(-2); // adiciona o zero à esquerda se os minutos tiverem apenas um dígito
-
-  const horaMinutos = `${hora}:${minutos}`;
-  const dataFormatada = data.toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: '2-digit',
-  });
-
-  const resultado = `${horaMinutos} ${dataFormatada}`;
-  return resultado;
+export const convertDate = (timestamp: string) => {
+  const date = new Date(timestamp);
+  const hours = `0${date.getHours() + 3}`.slice(-2); // adicionando 3 horas para ajustar o fuso horário
+  const minutes = `0${date.getMinutes()}`.slice(-2);
+  const day = `0${date.getDate()}`.slice(-2);
+  const month = `0${date.getMonth() + 1}`.slice(-2);
+  const year = date.getFullYear().toString().slice(-2);
+  return `${hours}:${minutes} ${day}-${month}-${year}`;
 };
