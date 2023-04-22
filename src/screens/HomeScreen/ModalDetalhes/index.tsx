@@ -52,7 +52,7 @@ export default function ModalDetalhesObjeto({
         rightIcon={{
           iconComponent: (
             <IconMaterialCI
-              style={{ fontSize: 45, color: 'red' }}
+              style={{ fontSize: 45, color: '#c00000' }}
               name="delete-circle"
             />
           ),
