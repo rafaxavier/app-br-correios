@@ -21,6 +21,25 @@ interface Evento {
   codigo: string;
   tipo: string;
   dtHrCriado: string;
+  unidade: Unidade;
+  unidadeDestino: UnidadeDestino;
+}
+
+interface Unidade {
+  endereco: Endereco;
+  tipo: string;
+  nome: string;
+}
+
+interface Endereco {
+  cidade: string;
+  uf: string;
+}
+
+interface UnidadeDestino {
+  endereco: Endereco;
+  tipo: string;
+  nome: string;
 }
 
 export default function RenderList({
@@ -35,10 +54,29 @@ export default function RenderList({
         const tipo = event ? event.tipo : value.tipo;
         const descricao = event ? event.descricao : value.descricao;
         const dtHrCriado = event ? event.dtHrCriado : value.dtHrCriado;
+        const cidade = event
+          ? event.unidade?.endereco?.cidade
+          : value.unidade?.endereco?.cidade;
+        const uf = event
+          ? event.unidade?.endereco?.uf
+          : value.unidade?.endereco?.uf;
+        const unidadeTipo = event ? event.unidade?.tipo : value.unidade?.tipo;
+        const unidadeNome = event ? event.unidade?.nome : value.unidade?.nome;
+        const unidadeDestinoNome = event
+          ? event.unidadeDestino?.nome
+          : value.unidadeDestino?.nome;
+        const unidadeDestinoCidade = event
+          ? event.unidadeDestino?.endereco?.cidade
+          : value.unidadeDestino?.endereco?.cidade;
+        const unidadeDestinoUf = event
+          ? event.unidadeDestino?.endereco?.uf
+          : value.unidadeDestino?.endereco?.uf;
+
         const getIcon = () => {
           switch (codigo) {
             case 'RO':
-              return 'truck';
+            case 'DO':
+              return 'long-arrow-alt-up';
             case 'BDE':
               if (tipo === '01') {
                 return 'check-circle';
@@ -56,16 +94,16 @@ export default function RenderList({
 
             case 'PAR':
               if (tipo === '10') {
-                return 'cubes';
+                return 'shield-alt';
               }
               if (tipo === '16') {
-                return 'map-marker-alt';
+                return 'plane-arrival';
               }
               return null;
 
             case 'PO':
               if (tipo === '01') {
-                return 'plane';
+                return 'plane-departure';
               }
               return null;
 
@@ -78,7 +116,7 @@ export default function RenderList({
 
         const iconStyle = (() => {
           switch (icon) {
-            case 'truck':
+            case 'long-arrow-alt-up':
               return styles.iconCaminho;
             case 'check-circle':
               return styles.iconSuccess;
@@ -86,11 +124,11 @@ export default function RenderList({
               return styles.iconAlert;
             case 'minus-circle':
               return styles.iconSad;
-            case 'cubes':
+            case 'shield-alt':
               return styles.iconFisc;
-            case 'map-marker-alt':
+            case 'plane-arrival':
               return styles.iconChecking;
-            case 'plane':
+            case 'plane-departure':
               return styles.iconPost;
             default:
               return null;
@@ -124,9 +162,40 @@ export default function RenderList({
               {icon && <IconFontAwesome5 style={iconStyle} name={icon} />}
               <Text style={styles.descricao}>{descricao}</Text>
             </View>
+
+            {unidadeTipo && (
+              <View style={styles.line2}>
+                <Text style={styles.data}>
+                  {unidadeTipo} {unidadeNome || `| ${cidade}-${uf}`}
+                </Text>
+              </View>
+            )}
             <View style={styles.line2}>
-              <Text style={styles.data}>{convertDate(dtHrCriado)}</Text>
+              <Text style={styles.data}>
+                {dtHrCriado ? convertDate(dtHrCriado) : ''}
+              </Text>
             </View>
+
+            {unidadeDestinoNome && (
+              <View>
+                <View style={styles.line2}>
+                  <IconFontAwesome5
+                    style={styles.iconCaminho2}
+                    name="shipping-fast"
+                  />
+                </View>
+                <View style={styles.line2}>
+                  <Text style={styles.data}>{unidadeDestinoNome || ''}</Text>
+                </View>
+                <View>
+                  <View style={styles.line2}>
+                    <Text style={styles.data}>
+                      {unidadeDestinoCidade || ''} - {unidadeDestinoUf || ''}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+            )}
           </View>
         );
       })}

@@ -21,7 +21,8 @@ export const styles = StyleSheet.create({
     marginBottom: 50,
   },
   card: {
-    height: 70,
+    // height: 70,
+    height: 'auto',
     marginHorizontal: 10,
     marginVertical: 5,
     padding: 5,
@@ -41,44 +42,48 @@ export const styles = StyleSheet.create({
 
   // formatacao icones de status
   iconSuccess: {
-    width: 40,
-    fontSize: 36,
+    width: 42,
+    fontSize: 30,
     color: 'green',
   },
 
   iconCaminho: {
-    width: 40,
+    width: 42,
     fontSize: 30,
-    color: 'purple',
+    color: '#3B218D',
   },
-
+  iconCaminho2: {
+    width: 35,
+    fontSize: 25,
+    color: '#009899',
+  },
   iconAlert: {
-    width: 40,
-    fontSize: 34,
+    width: 42,
+    fontSize: 30,
     color: 'orange',
   },
 
   iconSad: {
-    width: 40,
-    fontSize: 35,
-    color: 'red',
+    width: 42,
+    fontSize: 30,
+    color: '#c00000',
   },
 
   iconFisc: {
-    width: 40,
-    fontSize: 34,
-    color: 'blue',
+    width: 42,
+    fontSize: 30,
+    color: '#1E28AC',
   },
 
   iconChecking: {
-    width: 35,
-    fontSize: 34,
-    color: 'brown',
+    width: 42,
+    fontSize: 30,
+    color: '#0D4D4D',
   },
   iconPost: {
-    width: 40,
-    fontSize: 35,
-    color: '#326735',
+    width: 42,
+    fontSize: 30,
+    color: '#805B15',
   },
 
   descricao: {
@@ -97,11 +102,5 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: 'grey',
     fontWeight: '500',
-  },
-
-  iconDeletePost: {
-    width: 40,
-    fontSize: 35,
-    color: '#A90000',
   },
 });
