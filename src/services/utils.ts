@@ -7,3 +7,11 @@ export const convertDate = (timestamp: string) => {
   const year = date.getFullYear().toString().slice(-2);
   return `${hours}:${minutes} ${day}-${month}-${year}`;
 };
+
+export const formatCEP = (paramCep: string) => {
+  let cepFormater = paramCep;
+  cepFormater = cepFormater.replace(/\D/g, ''); // Remove qualquer caracter que não seja número
+  cepFormater = cepFormater.substring(0, 8); // Limita o número de caracteres para 8
+  cepFormater = cepFormater.replace(/^(\d{5})(\d)/, '$1-$2'); // Adiciona o hífen depois dos primeiros cinco dígitos
+  return cepFormater;
+};
