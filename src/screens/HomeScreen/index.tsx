@@ -121,7 +121,7 @@ export default function HomeScreen({
       </Modal>
 
       {/* header */}
-      <View style={{ marginTop: 25, marginBottom: 15 }}>
+      <View style={{ marginTop: 45, marginBottom: 15 }}>
         <Header
           title="Rastreio de Objetos"
           rightIcon={{
