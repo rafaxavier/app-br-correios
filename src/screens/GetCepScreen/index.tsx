@@ -10,6 +10,7 @@ import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import LottieView from 'lottie-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { formatCEP } from '../../services/utils';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import api from '../../services/api';
@@ -50,14 +51,6 @@ export default function GetCepScreen({ navigation }: GetCepScreenProps) {
   const [erro, setErro] = useState<Erro | undefined>();
   const [data, setData] = useState<ApiResponse>();
   const [loading, setLoading] = useState<'on' | 'off'>('off');
-
-  function formatCEP(paramCep: string) {
-    let cepFormater = paramCep;
-    cepFormater = cepFormater.replace(/\D/g, ''); // Remove qualquer caracter que não seja número
-    cepFormater = cepFormater.substring(0, 8); // Limita o número de caracteres para 8
-    cepFormater = cepFormater.replace(/^(\d{5})(\d)/, '$1-$2'); // Adiciona o hífen depois dos primeiros cinco dígitos
-    return cepFormater;
-  }
 
   async function handleGetCep() {
     setLoading('on');

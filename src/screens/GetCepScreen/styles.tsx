@@ -22,7 +22,6 @@ export const styles = StyleSheet.create({
     borderColor: '#153CA7',
     borderRadius: 25,
     paddingHorizontal: 15,
-    marginBottom: 60,
   },
   inputText: {
     fontSize: 18,
@@ -47,7 +46,7 @@ export const styles = StyleSheet.create({
   },
 
   card: {
-    top: 200,
+    top: 90,
     marginBottom: 200,
     alignSelf: 'center',
     backgroundColor: '#fff',
