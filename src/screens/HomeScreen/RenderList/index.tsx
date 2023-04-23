@@ -17,6 +17,7 @@ interface Objeto {
 
 interface Evento {
   descricao: string;
+  detalhe: string;
   evento: string;
   codigo: string;
   tipo: string;
@@ -53,6 +54,7 @@ export default function RenderList({
         const codigo = event ? event.codigo : value.codigo;
         const tipo = event ? event.tipo : value.tipo;
         const descricao = event ? event.descricao : value.descricao;
+        const detalhe = event ? event.detalhe : value.detalhe;
         const dtHrCriado = event ? event.dtHrCriado : value.dtHrCriado;
         const cidade = event
           ? event.unidade?.endereco?.cidade
@@ -145,51 +147,56 @@ export default function RenderList({
               }
             }}
           >
-            <View style={styles.line1}>
+            <View style={styles.cardHead}>
               {icon && <IconFontAwesome5 style={iconStyle} name={icon} />}
               <Text style={styles.descricao} numberOfLines={1}>
                 {descricao}
               </Text>
             </View>
-            <View style={styles.line2}>
+            <View style={styles.cardBody}>
               <Text style={styles.codigo}>{value.id}</Text>
-              <Text style={styles.data}>{convertDate(dtHrCriado)}</Text>
+              <Text style={styles.text}>{convertDate(dtHrCriado)}</Text>
             </View>
           </TouchableOpacity>
         ) : (
           <View style={styles.card} key={value.id || `${index}`}>
-            <View style={styles.line1}>
+            <View style={styles.cardHead}>
               {icon && <IconFontAwesome5 style={iconStyle} name={icon} />}
               <Text style={styles.descricao}>{descricao}</Text>
             </View>
+            {detalhe && (
+              <View style={styles.detalhe}>
+                <Text>{detalhe || ''}</Text>
+              </View>
+            )}
 
             {unidadeTipo && (
-              <View style={styles.line2}>
-                <Text style={styles.data}>
+              <View style={styles.cardBody}>
+                <Text style={styles.text}>
                   {unidadeTipo} {unidadeNome || `| ${cidade}-${uf}`}
                 </Text>
               </View>
             )}
-            <View style={styles.line2}>
-              <Text style={styles.data}>
+            <View style={styles.cardBody}>
+              <Text style={styles.text}>
                 {dtHrCriado ? convertDate(dtHrCriado) : ''}
               </Text>
             </View>
 
             {unidadeDestinoNome && (
               <View>
-                <View style={styles.line2}>
+                <View style={styles.cardBody}>
                   <IconFontAwesome5
                     style={styles.iconCaminho2}
                     name="shipping-fast"
                   />
                 </View>
-                <View style={styles.line2}>
-                  <Text style={styles.data}>{unidadeDestinoNome || ''}</Text>
+                <View style={styles.cardBody}>
+                  <Text style={styles.text}>{unidadeDestinoNome || ''}</Text>
                 </View>
                 <View>
-                  <View style={styles.line2}>
-                    <Text style={styles.data}>
+                  <View style={styles.cardBody}>
+                    <Text style={styles.text}>
                       {unidadeDestinoCidade || ''} - {unidadeDestinoUf || ''}
                     </Text>
                   </View>

@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     marginBottom: 50,
   },
   card: {
-    // height: 70,
     height: 'auto',
     marginHorizontal: 10,
     marginVertical: 5,
@@ -30,14 +29,25 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
   },
 
-  line1: {
+  cardHead: {
     maxWidth: 315,
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
-  line2: {
+  cardBody: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+  },
+  detalhe: {
+    padding: 7,
+    margin: 5,
+    backgroundColor: '#fafaa0',
+    // flexDirection: 'row',
+    // justifyContent: 'space-around',
+    // justifyItems: 'center',
+    // alignContent: 'center',
+    // alignItems: 'center',
+    // alignSelf: 'flex-end',
   },
 
   // formatacao icones de status
@@ -98,7 +108,7 @@ export const styles = StyleSheet.create({
     color: 'grey',
     fontWeight: '500',
   },
-  data: {
+  text: {
     fontSize: 14,
     color: 'grey',
     fontWeight: '500',
