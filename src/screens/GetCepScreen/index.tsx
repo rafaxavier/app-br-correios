@@ -10,6 +10,7 @@ import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import LottieView from 'lottie-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StackNavigationProp } from '@react-navigation/stack';
+import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import api from '../../services/api';
 import { styles } from './styles';
@@ -93,8 +94,8 @@ export default function GetCepScreen({ navigation }: GetCepScreenProps) {
           <LottieView style={styles.iconLoading} source={animation} autoPlay />
         </View>
       ) : (
-        <View style={styles.search}>
-          <Text style={styles.title}>Buscar por cep</Text>
+        <View style={{ marginTop: 45, marginBottom: 15, alignItems: 'center' }}>
+          <Header title="Buscar por cep" />
           <View style={styles.input}>
             <TextInput
               style={styles.inputText}

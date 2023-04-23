@@ -12,30 +12,10 @@ export const styles = StyleSheet.create({
     bottom: 0,
   },
 
-  search: {
-    position: 'absolute',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    paddingTop: 20,
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 90,
-  },
-
-  title: {
-    fontSize: 25,
-    color: '#fff',
-    alignSelf: 'center',
-    top: 45,
-    fontWeight: '600',
-  },
-
   input: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    top: 100,
+    top: 70,
     width: 300,
     height: 50,
     backgroundColor: '#fff',
