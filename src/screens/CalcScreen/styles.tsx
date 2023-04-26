@@ -1,30 +1,50 @@
 import {
-  View, StyleSheet, Image, Text, TextInput, TouchableOpacity, SafeAreaView,
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection:'column',  (default no react-native)
-    // backgroundColor: '#F9F905',
-
-    // backgroundColor: 'red',
-
-    // alinha verticalmente
-    // justifyContent: 'center',
-    // alinha horizontalmente
-    // alignItems: 'center',
-    // padding: 15,
-    // width: '100%',
   },
   background: {
-    // flex: 1,
-    width: '100%',
-    height: '100%',
-  },
-  title: {
-    color: '#fff',
-    fontSize: 20,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 
+  line: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+
+  label: {
+    marginHorizontal: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    padding: 10,
+    marginHorizontal: 10,
+    marginVertical: 5,
+  },
+  button: {
+    backgroundColor: '#1c6cce',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+  },
 });
