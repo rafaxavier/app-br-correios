@@ -31,8 +31,8 @@ export const styles = StyleSheet.create({
   },
   icon: {
     color: '#153CA7',
-    fontSize: 45,
-    margin: 2,
+    fontSize: 35,
+    margin: 5,
   },
 
   containerLoading: {
@@ -67,6 +67,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontStyle: 'italic',
     fontWeight: '600',
-    color: '#153CA7',
+    color: 'grey',
   },
 });
