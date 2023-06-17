@@ -4,11 +4,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from './styles';
 
 interface Props {
-  onValue: (value: string) => void;
+  onValue: (nome: string, codigo: string) => void;
   closeModal: () => void;
 }
 
 export default function AddCodigoRastreioModal({ onValue, closeModal }: Props) {
+  const [nome, setNome] = useState<string>('');
   const [codigo, setCodigo] = useState<string>('');
   const [canSave, setCanSave] = useState<boolean>(true);
 
@@ -24,7 +25,7 @@ export default function AddCodigoRastreioModal({ onValue, closeModal }: Props) {
 
   const getInput = () => {
     if (canSave) {
-      onValue(codigo);
+      onValue(nome, codigo);
     }
     closeModal();
   };
@@ -40,7 +41,21 @@ export default function AddCodigoRastreioModal({ onValue, closeModal }: Props) {
         <View style={styles.input}>
           <TextInput
             style={styles.inputText}
-            placeholder="Digite o Código"
+            placeholder="Nome do Objeto"
+            placeholderTextColor="#153CA7"
+            value={nome}
+            onChangeText={setNome}
+            maxLength={20}
+          />
+        </View>
+        <View>
+          <Text style={styles.textExemplo}>Exemplo: Presente da mamãe</Text>
+        </View>
+
+        <View style={styles.input}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Código de Rastreio"
             placeholderTextColor="#153CA7"
             value={codigo}
             onChangeText={setCodigo}
