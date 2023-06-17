@@ -14,6 +14,7 @@ interface Props {
 
 interface Objeto {
   id: string;
+  name: string;
   eventos: Evento[];
 }
 
@@ -61,6 +62,7 @@ export default function ModalDetalhesObjeto({
           }}
         />
       </View>
+      <Text style={styles.codigoHeader}>{objeto.name}</Text>
       <Text style={styles.codigoHeader}>{objeto.id}</Text>
 
       <RenderList dados={objeto.eventos} />
