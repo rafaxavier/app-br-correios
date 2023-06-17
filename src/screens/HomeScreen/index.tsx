@@ -68,8 +68,7 @@ export default function HomeScreen({
     if (code) {
       fecthObjeto(code, name).then(() => loadItems());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code]);
+  }, [code, name]);
 
   useEffect(() => {
     async function fetchAndUpdateObjects() {
@@ -80,8 +79,7 @@ export default function HomeScreen({
     }
 
     fetchAndUpdateObjects();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [name]);
 
   useEffect(() => {
     loadItems();
