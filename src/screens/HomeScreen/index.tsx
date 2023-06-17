@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, Modal } from 'react-native';
+import { View, SafeAreaView, Modal, Text } from 'react-native';
 import IconMaterialCI from 'react-native-vector-icons/MaterialCommunityIcons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -12,6 +12,7 @@ import {
   getItems,
   deletarObjetoById,
   fecthObjeto,
+  deletarTodosObjetos,
 } from '../../services/storage';
 import RenderList from './RenderList';
 
@@ -29,6 +30,7 @@ interface HomeScreenProps {
 
 interface Objeto {
   id: string;
+  name: string;
   eventos: Evento[];
 }
 
@@ -47,7 +49,8 @@ export default function HomeScreen({
   const [modalAddObjeto, setModalAddObjeto] = useState<boolean>(false);
   const [modalDetalhesObjeto, setModalDetalhesObjeto] =
     useState<boolean>(false);
-  const [cod, setCode] = useState<string>('');
+  const [code, setCode] = useState<string>('');
+  const [name, setName] = useState<string>('');
   const [objeto, setObjeto] = useState<Objeto>();
 
   async function loadItems() {
@@ -62,24 +65,27 @@ export default function HomeScreen({
   }
 
   useEffect(() => {
-    if (cod) {
-      fecthObjeto(cod).then(() => loadItems());
+    if (code) {
+      fecthObjeto(code, name).then(() => loadItems());
     }
-  }, [cod]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code]);
 
   useEffect(() => {
     async function fetchAndUpdateObjects() {
       const objects = await getItems();
       setData(objects);
       const ids = objects.map(obj => obj.id);
-      await Promise.all(ids.map(id => fecthObjeto(id)));
+      await Promise.all(ids.map(id => fecthObjeto(id, name)));
     }
 
     fetchAndUpdateObjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     loadItems();
+    // deletarTodosObjetos();
   }, []);
 
   function handleModalAddCod(): void {
@@ -91,8 +97,9 @@ export default function HomeScreen({
     setModalDetalhesObjeto(true);
   };
 
-  const onModalInputChange = (value: string) => {
-    setCode(value);
+  const onModalInputChange = (nome: string, codigo: string) => {
+    setCode(codigo);
+    setName(nome);
   };
 
   return (
@@ -142,10 +149,24 @@ export default function HomeScreen({
         />
       </View>
 
-      <RenderList
-        dados={data}
-        handleModalDetalhesObjeto={handleModalDetalhesObjeto}
-      />
+      {data.length > 0 ? (
+        <RenderList
+          dados={data}
+          handleModalDetalhesObjeto={handleModalDetalhesObjeto}
+        />
+      ) : (
+        <View
+          style={{
+            marginTop: 90,
+            marginBottom: 90,
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Text>Nenhum Objeto adicionado!!!</Text>
+        </View>
+      )}
       <Footer navigation={navigation} />
     </SafeAreaView>
   );
