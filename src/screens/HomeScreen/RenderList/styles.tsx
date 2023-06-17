@@ -42,12 +42,6 @@ export const styles = StyleSheet.create({
     padding: 7,
     margin: 5,
     backgroundColor: '#fafaa0',
-    // flexDirection: 'row',
-    // justifyContent: 'space-around',
-    // justifyItems: 'center',
-    // alignContent: 'center',
-    // alignItems: 'center',
-    // alignSelf: 'flex-end',
   },
 
   // formatacao icones de status
@@ -96,10 +90,17 @@ export const styles = StyleSheet.create({
     color: '#805B15',
   },
 
+  nome: {
+    maxWidth: 300,
+    fontWeight: '600',
+    fontSize: 14,
+    color: 'grey',
+    textAlign: 'center',
+  },
+
   descricao: {
     maxWidth: 300,
-    marginTop: 8,
-    fontWeight: 'bold',
+    fontWeight: '600',
     fontSize: 16,
     color: '#153CA7',
   },

@@ -12,6 +12,7 @@ interface Props {
 
 interface Objeto {
   id: string;
+  name: string;
   eventos: Evento[];
 }
 
@@ -147,6 +148,10 @@ export default function RenderList({
               }
             }}
           >
+            <Text style={styles.nome}>
+              {value.name ?? value.name.toUpperCase()}
+            </Text>
+
             <View style={styles.cardHead}>
               {icon && <IconFontAwesome5 style={iconStyle} name={icon} />}
               <Text style={styles.descricao} numberOfLines={1}>
