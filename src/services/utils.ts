@@ -5,7 +5,7 @@ export const convertDate = (timestamp: string) => {
   const day = `0${date.getDate()}`.slice(-2);
   const month = `0${date.getMonth() + 1}`.slice(-2);
   const year = date.getFullYear().toString().slice(-2);
-  return `${hours}:${minutes} ${day}-${month}-${year}`;
+  return `${hours}:${minutes}h  -  ${day}-${month}-${year}`;
 };
 
 export const formatCEP = (paramCep: string) => {
