@@ -14,11 +14,13 @@ export async function getItems(): Promise<any[]> {
 
 export async function adicionarObjeto(
   codigo: string,
+  nome: string,
   objeto: unknown,
 ): Promise<void> {
   const newData = {
     eventos: objeto,
     id: codigo,
+    name: nome,
   };
 
   try {
@@ -30,7 +32,21 @@ export async function adicionarObjeto(
 
     if (index !== -1) {
       // Se já existe, atualiza o objeto existente
-      objetos[index] = newData;
+      const nomeAtual: string = objetos[index].name;
+      if (nome !== '') {
+        objetos[index] = {
+          eventos: objeto,
+          id: codigo,
+          name: nome,
+        };
+      } else {
+        objetos[index] = {
+          eventos: objeto,
+          id: codigo,
+          name: nomeAtual,
+        };
+      }
+
       await AsyncStorage.setItem('@objetos', JSON.stringify(objetos));
       console.log('Objeto atualizado com sucesso!');
     } else {
@@ -39,18 +55,16 @@ export async function adicionarObjeto(
       await AsyncStorage.setItem('@objetos', JSON.stringify(objetos));
       console.log('Objeto adicionado com sucesso!');
     }
-
-    // loadItems();
   } catch (e) {
     console.log('Erro ao adicionar objeto:', e);
   }
 }
 
-export async function fecthObjeto(codigo: string) {
+export async function fecthObjeto(codigo: string, nome: string) {
   const codRastreio = codigo.toUpperCase();
   try {
     const response = await api.get(`/rastreio?cod=${codRastreio}`);
-    await adicionarObjeto(codRastreio, response.data);
+    await adicionarObjeto(codRastreio, nome, response.data);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     // return e;
@@ -76,7 +90,6 @@ export async function deletarObjetoById(id: string): Promise<void> {
 
     await AsyncStorage.setItem('@objetos', JSON.stringify(objetos));
     console.log(`Objeto com o ID ${id} deletado com sucesso!`);
-    // loadItems();
   } catch (e) {
     console.log('Erro ao deletar objeto:', e);
   }
