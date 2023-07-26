@@ -7,12 +7,16 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  ImageBackground,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StackNavigationProp } from '@react-navigation/stack';
 import IconMaterialCI from 'react-native-vector-icons/MaterialCommunityIcons';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Slider from '@react-native-community/slider';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Divider, RadioButton } from 'react-native-paper';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { SelectList } from 'react-native-dropdown-select-list';
 import api from '../../services/api';
 import { formatCEP } from '../../services/utils';
 import Header from '../../components/Header';
@@ -31,39 +35,10 @@ interface CalcScreenProps {
   navigation: NavigationProps;
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   label: {
-//     marginVertical: 10,
-//   },
-//   input: {
-//     borderWidth: 1,
-//     borderColor: '#ccc',
-//     borderRadius: 5,
-//     padding: 10,
-//     width: '80%',
-//   },
-//   button: {
-//     backgroundColor: '#1c6cce',
-//     padding: 10,
-//     borderRadius: 5,
-//     marginTop: 20,
-//   },
-//   buttonText: {
-//     color: '#fff',
-//     fontSize: 18,
-//   },
-// });
-
 export default function CalcScreen({ navigation }: CalcScreenProps) {
   const [sCepOrigem, setSCepOrigem] = useState('');
   const [sCepDestino, setSCepDestino] = useState('');
-  const [nVlPeso, setNVlPeso] = useState('');
+  const [nVlPeso, setNVlPeso] = useState('1');
   const [nCdFormato, setNCdFormato] = useState('');
   const [nVlComprimento, setNVlComprimento] = useState(0);
   const [nVlAltura, setNVlAltura] = useState(0);
@@ -71,6 +46,7 @@ export default function CalcScreen({ navigation }: CalcScreenProps) {
   const [nCdServico, setNCdServico] = useState('');
   const [nVlDiametro, setNVlDiametro] = useState(0);
   const [data, setData] = useState('');
+  const [value, setValue] = useState('first');
 
   const handleSubmit = async () => {
     try {
@@ -105,144 +81,157 @@ export default function CalcScreen({ navigation }: CalcScreenProps) {
       <View style={{ marginTop: 45, marginBottom: 15 }}>
         <Header title="Calcular Frete" />
       </View>
-      <ScrollView style={{ flex: 1, width: '100%', top: 40 }}>
-        {/* inputs Ceps */}
-        <View style={styles.line}>
-          <View style={{ width: '50%', paddingHorizontal: 10, margin: 5 }}>
-            {sCepOrigem && (
-              <Text
-                style={{
-                  fontSize: 12,
-                  position: 'absolute',
-                  bottom: 20,
-                  margin: 2,
-                  left: 7,
-                }}
-              >
-                Cep Origem
-              </Text>
-            )}
-            <TextInput
-              placeholderTextColor="#fff"
-              placeholder="Insira o Cep da Origem"
-              style={{
-                borderBottomWidth: 1,
-                borderColor: '#fff',
-                color: '#fff',
-              }}
-              onChangeText={setSCepOrigem}
-              value={formatCEP(sCepOrigem)}
-            />
+      <View style={{ flex: 1, margin: 10 }}>
+        <ScrollView
+          style={{
+            width: '100%',
+            top: 40,
+            marginBottom: 120,
+          }}
+        >
+          {/* inputs Ceps  OK */}
+          <View style={styles.line}>
+            <View style={{ width: '50%' }}>
+              <Text style={styles.label}>Origem:</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={setSCepOrigem}
+                value={formatCEP(sCepOrigem)}
+              />
+            </View>
+            <View style={{ width: '50%' }}>
+              <Text style={styles.label}>Destino:</Text>
+              <TextInput
+                style={styles.input}
+                onChangeText={setSCepDestino}
+                value={formatCEP(sCepDestino)}
+              />
+            </View>
           </View>
-          <View style={{ width: '50%', paddingHorizontal: 10, margin: 5 }}>
-            {sCepDestino && (
-              <Text
-                style={{
-                  fontSize: 12,
-                  position: 'absolute',
-                  bottom: 20,
-                  margin: 2,
-                  left: 7,
-                }}
-              >
-                Cep Destino
-              </Text>
-            )}
-            <TextInput
-              placeholderTextColor="#fff"
-              placeholder="Insira o Cep do Destino"
-              style={{
-                borderBottomWidth: 1,
-                borderColor: '#fff',
-                color: '#fff',
-              }}
-              onChangeText={setSCepDestino}
-              value={formatCEP(sCepDestino)}
-            />
-          </View>
-        </View>
-        {/* selects */}
-        <View style={styles.line}>
-          <View style={{ width: '50%' }}>
-            <Text style={styles.label}>Peso:</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={setNVlPeso}
-              value={nVlPeso}
-            />
-          </View>
-          <View style={{ width: '50%' }}>
-            <Text style={styles.label}>Formato:</Text>
-            <TextInput
-              style={styles.input}
-              onChangeText={setNCdFormato}
-              value={nCdFormato}
-            />
-          </View>
-        </View>
 
-        {/* Altura  */}
-        <Text style={styles.label}>Altura:{nVlAltura}</Text>
-        <Slider
-          minimumValue={0}
-          maximumValue={100}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000"
-          thumbTintColor="#FFFFFF"
-          onValueChange={value => setNVlAltura(parseFloat(value.toFixed(0)))}
-        />
-        {/* fim Altura */}
+          {/* tipos de servicos OK */}
+          <SelectList
+            boxStyles={{ backgroundColor: '#fff' }}
+            dropdownStyles={{ backgroundColor: '#fff', marginTop: 0 }}
+            inputStyles={{ color: 'grey' }}
+            placeholder="Selecione o Serviço"
+            setSelected={(val: string) => setNCdServico(val)}
+            data={[
+              { key: '04014', value: 'SEDEX à vista' },
+              { key: '04065', value: 'SEDEX à vista pagamento na entrega' },
+              { key: '04510', value: 'PAC à vista' },
+              { key: '04707', value: 'PAC à vista pagamento na entrega' },
+              { key: '40169', value: 'SEDEX12 ( à vista e a faturar)' },
+              { key: '40215', value: 'SEDEX 10 (à vista e a faturar)' },
+              { key: '40290', value: 'SEDEX Hoje Varejo' },
+            ]}
+            save="key"
+          />
 
-        {/* largura  */}
-        <Text style={styles.label}>Largura:{nVlLargura}</Text>
-        <Slider
-          minimumValue={0}
-          maximumValue={100}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000"
-          thumbTintColor="#FFFFFF"
-          onValueChange={value => setNVlLargura(parseFloat(value.toFixed(0)))}
-        />
-        {/* fim largura */}
+          <Divider />
+          {/* teste formato  */}
 
-        {/* Comprimento  */}
-        <Text style={styles.label}>Comprimento:{nVlComprimento}</Text>
-        <Slider
-          minimumValue={0}
-          maximumValue={100}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000"
-          thumbTintColor="#FFFFFF"
-          onValueChange={value =>
-            setNVlComprimento(parseFloat(value.toFixed(0)))
-          }
-        />
-        {/* fim Comprimento */}
+          {/* <View>
+            <TouchableOpacity
+            // onPress={proximoQuadro}
+            >
+              <ImageBackground
+                source={require('../../assets/caixa.png')}
+                style={{ width: 111, height: 322 }}
+              />
+            </TouchableOpacity>
+          </View> */}
 
-        {/* Diametro  */}
-        <Text style={styles.label}>Diametro:{nVlDiametro}</Text>
-        <Slider
-          minimumValue={0}
-          maximumValue={100}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000"
-          thumbTintColor="#FFFFFF"
-          onValueChange={value => setNVlDiametro(parseFloat(value.toFixed(0)))}
-        />
-        {/* fim Diametro */}
+          {/* ffim teste formato */}
+          <RadioButton.Group
+            onValueChange={newValue => setValue(newValue)}
+            value={value}
+          >
+            <Text>Formato</Text>
+            <View
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+            >
+              <View>
+                <Text>caixa/pacote</Text>
+                <RadioButton value="1" />
+              </View>
+              <View>
+                <Text>rolo/prisma</Text>
+                <RadioButton color="blue" value="2" />
+              </View>
+              <View>
+                <Text>Envelope</Text>
+                <RadioButton value="3" />
+              </View>
+            </View>
+          </RadioButton.Group>
+          {/* fim teste  */}
 
-        {/* aqui será um select */}
-        <Text style={styles.label}>Serviço:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={setNCdServico}
-          value={nCdServico}
-        />
+          {/* selects */}
 
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Calcular</Text>
-        </TouchableOpacity>
-      </ScrollView>
+          <Text style={styles.label}>Peso Estimado (Kg): {nVlPeso}</Text>
+          <Slider
+            minimumValue={1}
+            maximumValue={30}
+            minimumTrackTintColor="#FFFFFF"
+            maximumTrackTintColor="#000000"
+            thumbTintColor="#FFFFFF"
+            onValueChange={e => setNVlPeso(String(e.toFixed(0)))}
+          />
+
+          {/* Altura  */}
+          <Text style={styles.label}>Altura:{nVlAltura}</Text>
+          <Slider
+            minimumValue={1}
+            maximumValue={100}
+            minimumTrackTintColor="#FFFFFF"
+            maximumTrackTintColor="#000000"
+            thumbTintColor="#FFFFFF"
+            onValueChange={e => setNVlAltura(parseFloat(e.toFixed(0)))}
+          />
+          {/* fim Altura */}
+
+          {/* largura  */}
+          <Text style={styles.label}>Largura:{nVlLargura}</Text>
+          <Slider
+            minimumValue={10}
+            maximumValue={100}
+            minimumTrackTintColor="#FFFFFF"
+            maximumTrackTintColor="#000000"
+            thumbTintColor="#FFFFFF"
+            onValueChange={e => setNVlLargura(parseFloat(e.toFixed(0)))}
+          />
+          {/* fim largura */}
+
+          {/* Comprimento  */}
+          <Text style={styles.label}>Comprimento:{nVlComprimento}</Text>
+          <Slider
+            minimumValue={15}
+            maximumValue={100}
+            minimumTrackTintColor="#FFFFFF"
+            maximumTrackTintColor="#000000"
+            thumbTintColor="#FFFFFF"
+            onValueChange={e => setNVlComprimento(parseFloat(e.toFixed(0)))}
+          />
+          {/* fim Comprimento */}
+
+          {/* Diametro  */}
+          <Text style={styles.label}>Diametro:{nVlDiametro}</Text>
+          <Slider
+            minimumValue={0}
+            maximumValue={100}
+            minimumTrackTintColor="#FFFFFF"
+            maximumTrackTintColor="#000000"
+            thumbTintColor="#FFFFFF"
+            onValueChange={e => setNVlDiametro(parseFloat(e.toFixed(0)))}
+          />
+          {/* fim Diametro */}
+
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Calcular</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
       <Footer navigation={navigation} />
     </SafeAreaView>
   );

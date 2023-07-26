@@ -30,12 +30,15 @@ export const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   input: {
+    height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
     padding: 10,
-    marginHorizontal: 10,
+    marginHorizontal: 5,
     marginVertical: 5,
+    backgroundColor: '#fff',
+    color: 'grey',
   },
   button: {
     backgroundColor: '#1c6cce',
