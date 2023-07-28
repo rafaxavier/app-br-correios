@@ -1,8 +1,14 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import AppContainer from './src/navigation';
+import TabNavigator from './src/navigation';
 
 function App() {
-  return <AppContainer />;
+  return (
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
+  );
 }
 
 export default App;
