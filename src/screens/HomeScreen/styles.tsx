@@ -11,4 +11,14 @@ export const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+
+  containerLoading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  iconLoading: {
+    height: 150,
+  },
 });
